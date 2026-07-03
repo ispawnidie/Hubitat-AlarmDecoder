@@ -269,7 +269,7 @@ def page_cid_management() {
         getAllChildDevices().each { device ->
             if (device.deviceNetworkId.contains(":CID-"))
             {
-                found_devices << device.deviceNetworkId.split(":")[2].trim()
+                found_devices << device.deviceNetworkId.split(":")[1].trim()
             }
         }
         section("") {
@@ -296,7 +296,7 @@ def page_remove_selected_cid() {
         if (device.deviceNetworkId.contains(":CID-"))
         {
             // Only remove the one that matches our list
-            def device_name = device.deviceNetworkId.split(":")[2].trim()
+            def device_name = device.deviceNetworkId.split(":")[1].trim()
             def d = input_cid_devices.find{ it == device_name }
             if (d)
             {
@@ -463,7 +463,7 @@ def page_rfx_management() {
         getAllChildDevices().each { device ->
             if (device.deviceNetworkId.contains(":RFX-"))
             {
-                found_devices << device.deviceNetworkId.split(":")[2].trim()
+                found_devices << device.deviceNetworkId.split(":")[1].trim()
             }
         }
         section("") {
@@ -490,7 +490,7 @@ def page_remove_selected_rfx() {
         if (device.deviceNetworkId.contains(":RFX-"))
         {
             // Only remove the one that matches our list
-            def device_name = device.deviceNetworkId.split(":")[2].trim()
+            def device_name = device.deviceNetworkId.split(":")[1].trim()
             def d = input_rfx_devices.find{ it == device_name }
             if (d)
             {
@@ -1136,7 +1136,7 @@ def cidSet(evt) {
     def children = getChildDevices()
     children.each {
         if (it.deviceNetworkId.contains(":CID-")) {
-            def match = it.deviceNetworkId.split(":")[2].trim()
+            def match = it.deviceNetworkId.split(":")[1].trim()
             try {
                 if (device_name =~ /${match}/) {
                     if (logEnable) log.error("cidSet device: ${device_name} matches ${match} sendng state ${cidstate}")
